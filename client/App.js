@@ -1,9 +1,9 @@
 import React from 'react';
-import Wrapper from './containers/MainContainer.jsx';
+import MainContainer from './containers/MainContainer.jsx';
 
 const App = () => (
   <div id="app">
-    <Wrapper />
+    <MainContainer />
   </div>
 );
 
