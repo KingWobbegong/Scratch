@@ -3,7 +3,8 @@ import * as types from '../constants/actionTypes';
 const initialState = {
   photoArray: [
     {
-      file: 'C:UsersCJBgithubScratchclientDBproxyimage.png',
+      filepath:
+        'https://im.indiatimes.in/content/itimes/photo/2016/Aug/26/1472233327-25-pictures-that-will-instantly-make-you-happy_card.jpg',
     },
   ],
 };

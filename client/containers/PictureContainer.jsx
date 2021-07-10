@@ -33,10 +33,9 @@ render() {
 
     <div className='pictureContainer'>
         <div className='picturesDisplay'>
-        {/* <PicturesDisplay/> */}
+            
         
-        {console.log("HELLO!")}
-        <Picture filepath={this.props.photos[0]}/>
+        <Picture filepath={this.props.photos[0].filepath}/>
         </div>
     </div>
     )
