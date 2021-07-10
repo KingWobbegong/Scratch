@@ -23,4 +23,4 @@ const VoteContainer = props => (
     </div>
 )
 
-export default VoteContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(VoteContainer);

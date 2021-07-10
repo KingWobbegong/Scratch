@@ -1,13 +1,10 @@
 import { combineReducers } from 'redux';
 //import some other reducers here
-import happyReducer from './happyReducer';
+import photoReducer from './photoReducer';
 
+const reducers = combineReducers({
+  photo: photoReducer,
+  //if we have more reducers put them here
+});
 
-
-
-export default combineReducers({
-
-    happy: happyReducer
-
-})
-
+export default reducers;

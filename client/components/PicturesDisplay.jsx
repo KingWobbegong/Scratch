@@ -2,7 +2,7 @@ import React from 'react';
 import Picture from './Picture'
 
 
-const PicturesDisplay = () => (
+const PicturesDisplay = props => (
     // return (
 <div className='picturesDispalyHead'>
     <div className='picture'>

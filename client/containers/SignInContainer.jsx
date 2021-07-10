@@ -22,4 +22,6 @@ const mapStateToProps = ({
             </div>
         </div>
     )
-    export default SignInContainer;
+  
+
+    export default connect(mapStateToProps, mapDispatchToProps)(SignInContainer);
