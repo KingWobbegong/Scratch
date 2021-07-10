@@ -1,3 +1,3 @@
 Photo App
-co-authored by Christopher Berry, Olivia Yan, Nayan Parmar, and Michael Melville
+co-authored by Christopher Berry, Olivia Yeghiazarian, Nayan Parmar, and Michael Melville
 
