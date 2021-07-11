@@ -1,10 +1,50 @@
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+import { Provider } from 'react-redux';
+import { match, RouterContext } from 'react-router';
+import { renderToString } from 'react-dom/server';
+import indexReducer from '../client/reducers/indexReducer';
+import { store, createStore } from 'redux';
 
 const app = express();
 
 const PORT = 3000;
+
+app.get('*', (req, res) => {
+  match({ routes: routes, location: req.url }, (err, redirectLocation, renderProps) => {
+    if (err) {
+      return res.status(500).send(err.message);
+    }
+    if (redirectLocation) {
+      return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
+    }
+
+    let markup,
+      store,
+      initalState = {
+        photoReducer: {
+          photoArray: [
+            { filepath: './images/kingWobbegong.jpg' },
+            { filepath: './images/image.jpg' },
+            { filepath: './images/wobbegong.jpg' },
+            { filepath: './images/wobbegong1.jpg' },
+            { filepath: './images/wobbegong2.jpg' },
+          ],
+        },
+      };
+    store = createStore(indexReducer, initalState);
+    initalState = store.getState();
+    //JSON.stringify(store.getState())
+    if (rednerProps) {
+      markup = renderToString(
+        <Provider store={store}>{<RouterContext {...renderProps} />}</Provider>
+      );
+    }
+
+    return res.render('index', { markup: markup, initalState: initalState });
+  });
+});
 
 //handle parsing request body
 app.use(express.json());
@@ -53,8 +93,8 @@ app.post('/api/upload', (req, res) => {
 });
 app.use('/images', express.static(path.join(__dirname, './images')));
 if (process.env.NODE_ENV === 'production') {
-// statically serve everything in the build folder on the route '/build'
-  
+  // statically serve everything in the build folder on the route '/build'
+
   app.use('/build', express.static(path.join(__dirname, '../build')));
   // serve index.html on the route '/'
   app.get('/', (req, res) => {
@@ -62,8 +102,10 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+app.use(express.static(path.join((__dirname, '../build'))));
+
 app.use((req, res, next) => {
-  res.status(404).send('Sorry can\'t find that!');
+  res.status(404).send("Sorry can't find that!");
 });
 
 app.use((err, req, res, next) => {
