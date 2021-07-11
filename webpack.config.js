@@ -8,7 +8,21 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/',
   },
-
+  //makes debuggin easier and faster
+  devtool: 'eval-cheap-source-map',
+  devServer: {
+    publicPath: '/build',
+    proxy: {
+      '/api/**': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+      '/images': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+    },
+  },
   module: {
     rules: [
       {
@@ -34,16 +48,5 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-  },
-  //makes debuggin easier and faster
-  devtool: 'eval-cheap-source-map',
-  devServer: {
-    publicPath: '/build',
-    proxy: {
-      '/api/**': {
-        target: 'http://localhost:3000',
-        secure: false,
-      },
-    },
   },
 };

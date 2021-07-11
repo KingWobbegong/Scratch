@@ -51,19 +51,19 @@ app.post('/api/upload', (req, res) => {
   console.log(req.body, 'received at /api/upload');
   return res.send(req.body);
 });
-
-//if (process.env.NODE_ENV === 'production') {
+app.use('/images', express.static(path.join(__dirname, './images')));
+if (process.env.NODE_ENV === 'production') {
 // statically serve everything in the build folder on the route '/build'
-app.use('/build', express.static(path.join(__dirname, '../build')));
-
-// serve index.html on the route '/'
-app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
-});
-//}
+  
+  app.use('/build', express.static(path.join(__dirname, '../build')));
+  // serve index.html on the route '/'
+  app.get('/', (req, res) => {
+    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+  });
+}
 
 app.use((req, res, next) => {
-  res.status(404).send("Sorry can't find that!");
+  res.status(404).send('Sorry can\'t find that!');
 });
 
 app.use((err, req, res, next) => {

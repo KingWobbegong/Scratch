@@ -29,13 +29,15 @@ render() {
     console.log(this.props)
     return (
 
-    
-
     <div className='pictureContainer'>
         <div className='picturesDisplay'>
-            
-        
-        <Picture filepath={this.props.photos[0].filepath}/>
+            <h1>Welcome to the Wobbegang</h1>
+            <Picture filepath={this.props.photos[0].filepath}/>
+            <Picture filepath={this.props.photos[4].filepath}/>
+            <Picture filepath={this.props.photos[1].filepath}/>
+            <Picture filepath={this.props.photos[3].filepath}/>
+            <Picture filepath={this.props.photos[2].filepath}/>
+
         </div>
     </div>
     )
