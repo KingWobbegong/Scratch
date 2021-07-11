@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js",
+    "start": "nodenom server/server.js",
     "build": "NODE_ENV=production webpack",
-    "dev": "NODE_ENV=development webpack serve & node server/server.js"
+    "dev": "NODE_ENV=development webpack serve & nodemon server/server.js"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
