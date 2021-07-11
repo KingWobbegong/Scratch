@@ -52,6 +52,8 @@ app.post('/api/upload', (req, res) => {
   return res.send(req.body);
 });
 app.use('/images', express.static(path.join(__dirname, './images')));
+
+
 if (process.env.NODE_ENV === 'production') {
 // statically serve everything in the build folder on the route '/build'
   
@@ -78,4 +80,4 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT);
-console.log(`listening on port ${PORT}`);
+console.log(`listening on port ${PORT} in envirnoment ${process.env.NODE_ENV}`);
