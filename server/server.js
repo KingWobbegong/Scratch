@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const fs = require('fs');
+const Busboy = require('busboy');
 
 const app = express();
 
@@ -47,10 +49,33 @@ app.post('/api/update', (req, res) => {
 
 /*  This may need to be adjusted as we figur out
 how to send files with post requests? */
-app.post('/api/upload', (req, res) => {
-  console.log(req.body, 'received at /api/upload');
-  return res.send(req.body);
+app.post('/api/upload', function (req, res) {
+  const busboy = new Busboy({ headers: req.headers });
+  let returnFilename, returnPrepend;
+  busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+    let filePrepend = 1;
+    let saveTo = path.join(__dirname, './images/' + filename);
+    while (fs.existsSync(saveTo)){
+      
+      saveTo = path.join(__dirname, `./images/[${filePrepend}]` + filename);
+      filePrepend+=1;
+    }
+    console.log(`Uploading: [${filePrepend}]` + filename);
+    file.pipe(fs.createWriteStream(saveTo));
+    returnFilename = filename;
+    returnPrepend = filePrepend;
+  });
+  busboy.on('finish', function() {
+    console.log('Upload complete');
+    res.writeHead(200, { 'Connection': 'close' });
+    res.end(`Uploaded: "[${returnPrepend}]${returnFilename}"! That's all folks!`);
+  });
+  return req.pipe(busboy);
+
 });
+
+
+
 app.use('/images', express.static(path.join(__dirname, './images')));
 
 
