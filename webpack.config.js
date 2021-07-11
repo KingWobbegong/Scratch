@@ -14,12 +14,14 @@ module.exports = {
     publicPath: '/build',
     proxy: {
       '/api/**': {
-        target: 'http://localhost:3000',
+        target: 'http://localhost:3001',
         secure: false,
+        changeOrigin: true,
       },
       '/images': {
         target: 'http://localhost:3000',
         secure: false,
+        changeOrigin: true,
       },
     },
   },
