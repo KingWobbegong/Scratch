@@ -11,9 +11,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-
-
-
 app.get('/vote', (req, res) => {
   return res.send('this is /vote');
 });
@@ -39,40 +36,37 @@ app.get('/photos', (req, res) => {
 });
 
 app.post('/api/vote', (req, res) => {
-  console.log(req.body,'received at /api/vote');
+  console.log(req.body, 'received at /api/vote');
   return res.send(req.body);
 });
 
 app.post('/api/update', (req, res) => {
-  console.log(req.body,'received at /api/update');
+  console.log(req.body, 'received at /api/update');
   return res.send(req.body);
 });
-
 
 /*  This may need to be adjusted as we figur out
 how to send files with post requests? */
 app.post('/api/upload', (req, res) => {
-  console.log(req.body,'received at /api/upload');
+  console.log(req.body, 'received at /api/upload');
   return res.send(req.body);
 });
+app.use('/images', express.static(path.join(__dirname, './images')));
 
 
-
-//if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
 // statically serve everything in the build folder on the route '/build'
-app.use('/build', express.static(path.join(__dirname, '../build')));
+  
+  app.use('/build', express.static(path.join(__dirname, '../build')));
+  // serve index.html on the route '/'
+  app.get('/', (req, res) => {
+    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+  });
+}
 
-// serve index.html on the route '/'
-app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
-});
-//}
-
-app.use ((req, res, next) => {
+app.use((req, res, next) => {
   res.status(404).send('Sorry can\'t find that!');
 });
-
-
 
 app.use((err, req, res, next) => {
   const defaultErr = {
@@ -86,4 +80,4 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT);
-console.log(`listening on port ${PORT}`);
+console.log(`listening on port ${PORT} in envirnoment ${process.env.NODE_ENV}`);

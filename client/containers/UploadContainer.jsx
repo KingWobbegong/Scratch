@@ -25,4 +25,4 @@ const UploadContainer = props => (
     </div>
 )
 
-export default UploadContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(UploadContainer);

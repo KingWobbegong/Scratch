@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import PicturesDisplay from '../components/PicturesDisplay'
+import Picture from '../components/Picture'
 
-const mapStateToProps = ({
-    //const mapStateToProps = ({happy}) => ({wantedValues: happy.wantedValues})
-    })=>({});
+const mapStateToProps = state =>  ({  
+photos: state.photo.photoArray,    
+});
+//const mapStateToProps = ({happy}) => ({wantedValues: happy.wantedValues})
 
 const mapDispatchToProps = dispatch => ({
         /*key:value pairs like: 
@@ -15,15 +17,32 @@ const mapDispatchToProps = dispatch => ({
         */
 });
 
-const PictureContainer = props => (
+class PictureContainer extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+
+// const PictureContainer = props => (
     // return (
+render() {
+    console.log(this.props)
+    return (
+
     <div className='pictureContainer'>
         <div className='picturesDisplay'>
-        <PicturesDisplay/>
+            <h1>Welcome to the Wobbegang</h1>
+            <Picture filepath={this.props.photos[0].filepath}/>
+            <Picture filepath={this.props.photos[4].filepath}/>
+            <Picture filepath={this.props.photos[1].filepath}/>
+            <Picture filepath={this.props.photos[3].filepath}/>
+            <Picture filepath={this.props.photos[2].filepath}/>
 
         </div>
     </div>
     )
+}
+}
 
         
-export default PictureContainer;
+    export default connect(mapStateToProps, null)(PictureContainer);

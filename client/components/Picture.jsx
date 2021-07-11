@@ -1,9 +1,10 @@
 import React from 'react';
 
 
-const Picture = () => (
+const Picture = props => (
     <div className='pictureHead'>
-        <h1> Hello, picutre</h1>
+        <h3> Wanted:</h3>
+        <img src={props.filepath}/>
     </div>
 )
 
