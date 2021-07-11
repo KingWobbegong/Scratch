@@ -36,6 +36,7 @@
     "express": "^4.17.1",
     "mongodb": "^3.6.10",
     "mongoose": "^5.13.2",
+    "pg": "^8.6.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "redux": "^4.1.0",
