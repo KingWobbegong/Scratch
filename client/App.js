@@ -1,9 +1,13 @@
 import React from 'react';
-import Wrapper from './containers/MainContainer.jsx';
+import MainContainer from './containers/MainContainer.jsx';
+import NavBar from './components/NavBar';
 
 const App = () => (
   <div id="app">
-    <Wrapper />
+    <div>
+      <NavBar />
+    </div>
+    <MainContainer />
   </div>
 );
 
