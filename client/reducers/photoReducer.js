@@ -7,32 +7,7 @@ const initialState = {
   //   photoId: photoId,
   //   file: 'file',
   // },
-  photoArray: [
-    {
-      id: 1,
-      filepath: './images/kingWobbegong.jpg',
-    },
-    {
-      id: 2,
-      filepath: './images/image.jpg',
-    },
-    {
-      id: 3,
-      filepath: './images/wobbegong.jpg',
-    },
-    {
-      id: 4,
-      filepath: './images/wobbegong1.jpg',
-    },
-    {
-      id: 5,
-      filepath: './images/wobbegong2.jpg',
-    },
-    {
-      id: 6,
-      filepath: './images/[1]image.png',
-    },
-  ],
+  photoArray: [],
 };
 
 const photoReducer = (state = initialState, action) => {
