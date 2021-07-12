@@ -51,6 +51,11 @@ app.post('/api/update', (req, res) => {
   console.log(req.body, 'received at /api/update');
   return res.send(req.body);
 });
+app.post('/api/upload/save', SQLController.uploadFileToDB, (req, res) => {
+  console.log('req.body from api/upload/save', req.body);
+  console.log('res.locals from api/upload/save', res.locals);
+  return res.status(200).json(res.locals);
+});
 
 /*  This may need to be adjusted as we figur out
 how to send files with post requests? */

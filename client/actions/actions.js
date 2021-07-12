@@ -35,7 +35,7 @@ export const removePicture = (photoId) => ({
 export const uploadFile = (e) => {
   const filename = e.target.value;
   const formData = new FormData();
-  let resFilePath;
+  //let resFilePath;
   console.log(e);
   formData.append(filename, e.target.files[0]);
   return (dispatch) => {
@@ -46,7 +46,8 @@ export const uploadFile = (e) => {
       })
         .then((response) => response.text())
         .then((response) => {
-          dispatch({ type: types.UPLOAD_PICTURE, payload: response });
+          //this disptach puts picture into state;
+          // dispatch({ type: types.UPLOAD_PICTURE, payload: response });
           /*
         NOTE:
         response has now been processed and is a string that is equal to the new
@@ -54,16 +55,51 @@ export const uploadFile = (e) => {
         shove it into state or something? Add it to the array of filepaths we have?
         Send it to the database? I have faith, you'll kick ass
         */
-          //resFilePath = response;
+          let resFilePath = response;
           console.log(resFilePath);
+          console.log('resFilePath', resFilePath);
 
           console.log('this is gonna be your filepath: ', response);
+
+          fetch('http://localhost:3000/api/upload/save', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+
+            body: JSON.stringify({ filepath: response }),
+          })
+            .then((response) => response.json())
+            .then((response) => {
+              console.log('response from savefiletodb', response);
+            })
+            .catch((err) => console.log('error from savefiletodb', err));
+
+          // saveFileToDB(`${response}`);
         })
+        // .then(saveFileToDB(resFilePath))
         // .then((resFilePath) => dispatch({ type: types.UPLOAD_PICTURE, payload: resFilePath }))
 
         .catch((err) => console.log('whoops: ', err))
     );
   };
+};
+
+export const saveFileToDB = (resFilePath) => {
+  console.log(resFilePath);
+  return fetch('http://localhost:3000/api/upload/save', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+
+    body: { filepath: resFilePath },
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      console.log('response from savefiletodb', response);
+    })
+    .catch((err) => console.log('error from savefiletodb', err));
 };
 
 /*

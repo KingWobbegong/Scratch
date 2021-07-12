@@ -22,12 +22,13 @@ SQLController.getFilesFromDB = (req, res, next) => {
 
 SQLController.uploadFileToDB = (req, res, next) => {
   const filepath = req.body;
-  console.log(filepath);
+  console.log('req.body', req.body);
+  console.log('filePath', filepath);
   const uploadPhotoQ = {
     text: `INSERT INTO pictures (filepath) VALUES ($1)`,
   };
 
-  db.query(uploadPhotoQ, filepath, (err, qres) => {
+  db.query(uploadPhotoQ, [filepath], (err, qres) => {
     if (err) {
       console.log(err);
       return next(err);
