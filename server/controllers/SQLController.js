@@ -40,40 +40,37 @@ SQLController.uploadFileToDB = (req, res, next) => {
   });
 };
 
- // UPDATE table
-  // SET column1 = value1,
-  //     column2 = value2 ,...
-  // WHERE
-  //   condition;
+// UPDATE table
+// SET column1 = value1,
+//     column2 = value2 ,...
+// WHERE
+//   condition;
 
-
-// MiddleWare to increment vote_count on a picture 
+// MiddleWare to increment vote_count on a picture
 SQLController.vote = (req, res, next) => {
   // SQL Query
-  //distr the id 
-  const {_id, change } = req.body
-  // check if change is === add 
-  if  (change === 'add') {
-  const voteQuery= {
-    text: `UPDATE pictures SET vote_count = vote_count+1 WHERE _id = $1` ,
-  };
+  //distr the id
+  const { _id, change } = req.body;
+  console.log('req.body', req.body);
+  console.log('_id', _id);
+  console.log('change', change);
+  // check if change is === add
+  if (change === 'add') {
+    const voteQuery = {
+      text: `UPDATE pictures SET vote_count = vote_count+1 WHERE _id = $1`,
+    };
 
- db.query(voteQuery, [_id], (err, res) => {
-
-   // if change is true then increment the vote 
-     if (err) {
-      console.log(err);
-      return next(err);
-    }
-    res.locals = res;
-    console.log('this is coming from updateIncrementCount', res.locals);
-    return next();
-  });
-} 
- // else  
- else {
-   return next('change needs to be add!')
- }
+    db.query(voteQuery, [_id], (err, res) => {
+      // if change is true then increment the vote
+      if (err) {
+        console.log(err);
+        return next(err);
+      }
+      res.locals = res;
+      console.log('this is coming from updateIncrementCount', res.locals);
+      return next();
+    });
+  }
 };
 
 module.exports = SQLController;

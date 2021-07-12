@@ -4,10 +4,11 @@
 import * as types from '../constants/actionTypes';
 import * as constants from '../constants/miscConstants';
 
-export const uploadPicture = (photoId) => (dispatch) => dispatch({
-  type: types.UPLOAD_PICTURE,
-  payload: photoId,
-});
+export const uploadPicture = (photoId) => (dispatch) =>
+  dispatch({
+    type: types.UPLOAD_PICTURE,
+    payload: photoId,
+  });
 
 export const getPicture = () => (dispatch) => {
   fetch('http://localhost:3000/home') //request
@@ -27,37 +28,45 @@ export const getPicture = () => (dispatch) => {
 //         )
 // };
 
-export const removePicture = (photoId) => (dispatch)=>{
+export const removePicture = (photoId) => (dispatch) => {
   //send backend server requests to handle removing pictures here
-  
+
   dispatch({
-  type: types.REMOVE_PICTURE,
-  payload: photoId,
-});
-}
-
-export const addVote = (photoId) => (dispatch)=>{
-  const apiAddVoteUrl = "http://localhost:3000/api/vote";
-fetch(apiAddVoteUrl, {
-  method: 'POST',
-  body: JSON.stringify({_id:photoId,change:"add"})
-})
-.then(response=>response.json())
-.then(()=> {
-  dispatch(
-  {
-    type: types.ADD_VOTE,
-    payload: photoId
+    type: types.REMOVE_PICTURE,
+    payload: photoId,
   });
-})
-  .catch(err=>
-    console.log('whoops, backend didn\'t respond correctly from addVote API call! \n returned the following error:',err)
-  );
+};
 
+export const addVote = (photoId) => (dispatch) => {
+  console.log('photoId from addVote', photoId);
+  const apiAddVoteUrl = 'http://localhost:3000/api/vote';
+  return fetch(apiAddVoteUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ _id: photoId, change: 'add' }),
+  })
+    .then((response) => response.json())
+    .then(() => {
+      dispatch({
+        type: types.ADD_VOTE,
+        payload: photoId,
+      });
+    })
+    .catch((err) =>
+      console.log(
+        "whoops, backend didn't respond correctly from addVote API call! \n returned the following error:",
+        err
+      )
+    );
+};
 
-
-}
-
+export const downVote = () => (dispatch) => {
+  dispatch({
+    type: types.DOWN_VOTE,
+  });
+};
 
 export const uploadFile = (e) => {
   const filename = e.target.value;
