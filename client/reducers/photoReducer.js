@@ -1,6 +1,6 @@
 import * as types from '../constants/actionTypes';
 
-let photoId = 0;
+let photoId = 6;
 
 const initialState = {
   photoToUpload: {
@@ -45,12 +45,13 @@ const photoReducer = (state = initialState, action) => {
     //
 
     case types.UPLOAD_PICTURE /* 'photoAdded' */:
-      newState = state.slice();
-      newState.photoToUpload.photoId = ++photoId;
-      newState.photoToUpload.file = action.payload;
+      console.log(action.payload);
+      newState = { ...state };
+      newState.photoArray.push({ id: ++photoId, filepath: action.payload });
 
       return {
-        ...newState,
+        ...state,
+        photoArray: state.photoArray.concat({ id: ++photoId, filepath: action.payload }),
       };
 
     // return {
@@ -67,7 +68,7 @@ const photoReducer = (state = initialState, action) => {
     case types.REMOVE_PICTURE /*'photoRemoved'*/:
       if (state.photoArray[action.payload.photoId]) {
         const photoId = action.payload.photoId;
-        newState = state.slice();
+        newState = { ...state };
         newState.filer((photo) => !photo.id !== photoId);
       }
       return {
@@ -78,7 +79,7 @@ const photoReducer = (state = initialState, action) => {
 
     // case types.GET_PICTURE: /*for getting picture from SQL*/
     case types.LOAD_PICTURES:
-      newState = state.slice();
+      newState = { ...state };
       newState.photoArray = action.payload;
 
       return {

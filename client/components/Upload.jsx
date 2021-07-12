@@ -1,13 +1,49 @@
 import React from 'react';
 
 
-const Upload = props => (
+
+// const uploadFile = (e) =>{
+//     const filename = e.target.value;
+//     const formData = new FormData();
+//     let resFilePath;
+//     console.log(e);
+//     formData.append(filename, e.target.files[0])
+//     fetch('http://localhost:3000/api/upload', {
+//         method: 'POST',
+//         body: formData
+//     })
+//     .then(response=>response.text())
+//     .then(response=>{
+//         /*
+//         NOTE:
+//         response has now been processed and is a string that is equal to the new
+//         filepath of the file you just uploaded to the server. So, you know,
+//         shove it into state or something? Add it to the array of filepaths we have?
+//         Send it to the database? I have faith, you'll kick ass
+//         */
+//         resFilePath = response
+//         console.log("this is gonna be your filepath: ",response)})
+//         .then(dispatch({type: types.UPLOAD_PICTURE,
+//         payload: resFilePath }))
+//     .catch(err=>console.log('whoops: ', err));
+// }
+
+
+
+const Upload = ({
+    uploadFile,
+    }) => (
     <div className='uploadComponentHead'>
         <div className='upload'>
             <h1>Hello Upload</h1>
             <input 
             type="file" 
-            onChange={
+            onChange={uploadFile}
+            accept="image/png, image/jpeg"
+            />
+        </div>
+    </div>
+)
                 
 /*THIS IS THE (anonymous) FUNCTION THAT WILL, ON CHANGE 
 (AKA USER SELECTS A PICTURE, HITS OK)
@@ -39,34 +75,7 @@ and on completion of all the work, have the reducer set it equal to null again.
 
 --Mike
 */
-                
-            e=>{
-                const filename = e.target.value;
-                const formData = new FormData();
-                formData.append(filename, e.target.files[0])
-                fetch('http://localhost:3000/api/upload', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response=>response.text())
-                .then(response=>{
-                    /*
-                    NOTE:
-                    response has now been processed and is a string that is equal to the new
-                    filepath of the file you just uploaded to the server. So, you know,
-                    shove it into state or something? Add it to the array of filepaths we have?
-                    Send it to the database? I have faith, you'll kick ass
-                    */
-                    console.log("this is gonna be your filepath: ",response)})
-                .catch(err=>console.log('whoops: ', err));
-            }
-        
-        
-        }
-            accept="image/png, image/jpeg"
-            />
-        </div>
-    </div>
-)
+  
+
 
 export default Upload;
