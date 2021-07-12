@@ -51,6 +51,9 @@ SQLController.vote = (req, res, next) => {
   // SQL Query
   //distr the id
   const { _id, change } = req.body;
+  console.log('req.body', req.body);
+  console.log('_id', _id);
+  console.log('change', change);
   // check if change is === add
   if (change === 'add') {
     const voteQuery = {
@@ -67,10 +70,6 @@ SQLController.vote = (req, res, next) => {
       console.log('this is coming from updateIncrementCount', res.locals);
       return next();
     });
-  }
-  // else
-  else {
-    return next('change needs to be add!');
   }
 };
 

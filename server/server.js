@@ -13,9 +13,11 @@ const SQLController = require('./controllers/SQLController');
 //handle parsing request body
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({
-  extended: true
-}));
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 app.use(cookieParser());
 
 app.get('/vote', (req, res) => {
@@ -44,15 +46,9 @@ app.get('/photos', (req, res) => {
   return res.send('this is /photos');
 });
 
-app.post('/api/vote', (req, res, next) => {
-    console.log('in the hole');
-    return next();
-  },
-  SQLController.vote, (req, res) => {
-    // console.log(" hello MIke")
-     console.log(req.body, 'received at /api/vote');
-    return res.send(req.body);
-  });
+app.post('/api/vote', SQLController.vote, (req, res) => {
+  return res.send(req.body);
+});
 
 app.post('/api/update', (req, res) => {
   console.log(req.body, 'received at /api/update');
@@ -69,7 +65,7 @@ app.post('/api/upload/save', SQLController.uploadFileToDB, (req, res) => {
 how to send files with post requests? */
 app.post('/api/upload', function (req, res) {
   const busboy = new Busboy({
-    headers: req.headers
+    headers: req.headers,
   });
   let returnFilename, returnPrepend, returnFilepath, filepath;
   busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
@@ -87,7 +83,7 @@ app.post('/api/upload', function (req, res) {
   busboy.on('finish', function () {
     console.log('Upload complete');
     res.writeHead(200, {
-      Connection: 'close'
+      Connection: 'close',
     });
     res.end(filepath);
   });
@@ -115,7 +111,7 @@ app.use((err, req, res, next) => {
     log: 'Express error handler caught unknown middleware error',
     status: 500,
     message: {
-      err: 'An error occurred'
+      err: 'An error occurred',
     },
   };
   const errorObj = Object.assign({}, defaultErr, err);

@@ -7,6 +7,7 @@ const initialState = {
 
 const photoReducer = (state = initialState, action) => {
   let newState;
+  let newState2;
   let newPhotoArray = [];
   switch (action.type) {
     // case DO_A_THING:
@@ -45,14 +46,25 @@ const photoReducer = (state = initialState, action) => {
       };
 
     case types.ADD_VOTE:
-      newPhotoArray = JSON.parse(JSON.stringify(photoArray));
-      let votedPhotoIndex =  newPhotoArray.findIndex((element)=>element._id==action.payload)
+      console.log('action.payload', action.payload);
+      newPhotoArray = JSON.parse(JSON.stringify(state.photoArray));
+      let votedPhotoIndex = newPhotoArray.findIndex((element) => element._id == action.payload);
       let votedPhoto = newPhotoArray[votedPhotoIndex];
-      votedPhoto.vote_count +=1;
+      console.log('votedPhoto', votedPhoto);
+      console.log('voted photo index', votedPhotoIndex);
+      votedPhoto.vote_count += 1;
       return {
         ...state,
-        photoArray: newPhotoArray
-      }
+        photoArray: newPhotoArray,
+      };
+
+    case types.DOWN_VOTE:
+      newState = JSON.stringify({ ...state });
+      newState2 = JSON.parse(newState);
+      console.log(state);
+      return {
+        ...newState2,
+      };
 
     default:
       return state;
