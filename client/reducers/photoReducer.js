@@ -1,7 +1,6 @@
 import * as types from '../constants/actionTypes';
 
-let photoId = 4;
-
+//photoArray structure [{_id : num, filepath: string, vote_count: int}]
 const initialState = {
   photoArray: [],
 };

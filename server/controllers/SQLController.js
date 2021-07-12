@@ -27,10 +27,10 @@ SQLController.uploadFileToDB = (req, res, next) => {
   console.log('req.body', req.body);
   console.log('filePath', filepath);
   const uploadPhotoQ = {
-    text: `INSERT INTO pictures (filepath) VALUES ($1)`,
+    text: `INSERT INTO pictures (filepath, vote_count) VALUES ($1, $2)`,
   };
 
-  db.query(uploadPhotoQ, [filepath], (err, qres) => {
+  db.query(uploadPhotoQ, [filepath, 0], (err, qres) => {
     if (err) {
       console.log(err);
       return next(err);
