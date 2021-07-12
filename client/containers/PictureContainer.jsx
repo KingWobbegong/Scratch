@@ -23,8 +23,7 @@ class PictureContainer extends React.Component {
     super(props);
   }
 
-  // const PictureContainer = props => (
-  // return (
+  
   render() {
     const arr = [];
     
@@ -39,11 +38,7 @@ class PictureContainer extends React.Component {
         <div className="picturesDisplay">
           <h1>Welcome to the Wobbegang</h1>
           {arr}
-          {/* <Picture filepath={this.props.photos[0].filepath}/>
-            <Picture filepath={this.props.photos[4].filepath}/>
-            <Picture filepath={this.props.photos[1].filepath}/>
-            <Picture filepath={this.props.photos[3].filepath}/>
-            <Picture filepath={this.props.photos[2].filepath}/> */}
+          {/* <Picture filepath={this.props.photos[0].filepath}/> */}
         </div>
       </div>
     );

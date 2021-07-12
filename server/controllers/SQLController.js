@@ -2,6 +2,7 @@ const db = require('../models');
 
 const SQLController = {};
 
+//gets files from database
 SQLController.getFilesFromDB = (req, res, next) => {
   // SQL Query
 
@@ -19,7 +20,8 @@ SQLController.getFilesFromDB = (req, res, next) => {
     return next();
   });
 };
-
+//takes the returned body from saving the file to folder,
+// and then saves that filepath to database
 SQLController.uploadFileToDB = (req, res, next) => {
   const { filepath } = req.body;
   console.log('req.body', req.body);

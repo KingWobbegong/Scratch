@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.get('/vote', (req, res) => {
   return res.send('this is /vote');
 });
-
+//this is the call to get all files from sql database
 app.get('/home', SQLController.getFilesFromDB, (req, res) => {
   console.log(req.body, 'received at /app/home');
   console.log('res.locals from app/home/get', res.locals);
@@ -51,6 +51,7 @@ app.post('/api/update', (req, res) => {
   console.log(req.body, 'received at /api/update');
   return res.send(req.body);
 });
+//this is the call to save the filepath to the SQL database
 app.post('/api/upload/save', SQLController.uploadFileToDB, (req, res) => {
   console.log('req.body from api/upload/save', req.body);
   console.log('res.locals from api/upload/save', res.locals);

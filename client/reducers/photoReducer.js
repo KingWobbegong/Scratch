@@ -3,10 +3,6 @@ import * as types from '../constants/actionTypes';
 let photoId = 4;
 
 const initialState = {
-  // photoToUpload: {
-  //   photoId: photoId,
-  //   file: 'file',
-  // },
   photoArray: [],
 };
 
@@ -20,27 +16,15 @@ const photoReducer = (state = initialState, action) => {
     //      secondChangedKey: ""};
     //
 
-    case types.UPLOAD_PICTURE /* 'photoAdded' */:
-      console.log(action.payload);
-      //newState = { ...state };
-      //newState.photoArray.push({ id: ++photoId, filepath: action.payload });
-      if (state.photoArray.length > photoId) photoId = state.photoArray.length + 1;
-
-      return {
-        ...state,
-        photoArray: state.photoArray.concat({ id: photoId++, filepath: action.payload }),
-      };
-
-    // return {
-    //     ...state, // copy all the photos from the state
-    //     {
-    //       // increment id
-    //       id: ++photoId,
-    //       description: action.payload.description,
-    //       resolve: false,
-    //     },
-    //   }
-    //   ];
+    //this was for updating state from uploaded picture,
+    // changed apprach to save to SQL then get state from SQL database
+    // case types.UPLOAD_PICTURE /* 'photoAdded' */:
+    //   console.log(action.payload);
+    //   if (state.photoArray.length > photoId) photoId = state.photoArray.length + 1;
+    //   return {
+    //     ...state,
+    //     photoArray: state.photoArray.concat({ id: photoId++, filepath: action.payload }),
+    //   };
 
     case types.REMOVE_PICTURE /*'photoRemoved'*/:
       if (state.photoArray[action.payload.photoId]) {
@@ -56,15 +40,6 @@ const photoReducer = (state = initialState, action) => {
 
     // case types.GET_PICTURE: /*for getting picture from SQL*/
     case types.LOAD_PICTURES:
-      newState = { ...state };
-      //newState.photoArray = newPhotoArray;
-      //console.log('action.payload', action.payload);
-      //console.log('action.payload.rows', action.payload.rows);
-      newPhotoArray = action.payload.rows;
-      //console.log('newPhoto Array', newPhotoArray);
-      newState.photoArray = newPhotoArray;
-      //console.log('newState', newState);
-
       return {
         ...state,
         photoArray: action.payload.rows,

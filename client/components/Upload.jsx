@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-
+// this is now in the actions.js
 // const uploadFile = (e) =>{
 //     const filename = e.target.value;
 //     const formData = new FormData();
