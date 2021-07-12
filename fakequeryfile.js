@@ -1,4 +1,4 @@
-const db = require('./models');
+const db = require('./server/models');
 
 const test = {
   text: `SELECT * FROM picture`,

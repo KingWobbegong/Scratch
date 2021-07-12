@@ -72,6 +72,7 @@ export const uploadFile = (e) => {
             .then((response) => response.json())
             .then((response) => {
               console.log('response from savefiletodb', response);
+              // dispatch({ type: types.LOAD_PICTURES });
             })
             .catch((err) => console.log('error from savefiletodb', err));
 

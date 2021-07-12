@@ -15,13 +15,13 @@ SQLController.getFilesFromDB = (req, res, next) => {
       return next(err);
     }
     res.locals = qres;
-    console.log(res.locals);
+    console.log('this is coming from getPhoto', res.locals);
     return next();
   });
 };
 
 SQLController.uploadFileToDB = (req, res, next) => {
-  const filepath = req.body;
+  const { filepath } = req.body;
   console.log('req.body', req.body);
   console.log('filePath', filepath);
   const uploadPhotoQ = {
