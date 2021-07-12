@@ -5,6 +5,9 @@ const Vote = props => (
     <div className='voteComponentHead'>
         <div className='vote'>
             <h1>Hello Vote</h1>
+            <img src={props.photo} className='endVote'/>
+            <button className="upvote">upvote</button>
+            <button className='downvote'>downvote</button>
         </div>
     </div>
 )
