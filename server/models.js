@@ -4,7 +4,7 @@ const PG_URI =
   'postgres://kgfdbweo:P6oEYXFN8YnCZoBGR51dRxM6oR3d8gaS@kashin.db.elephantsql.com/kgfdbweo';
 
 const pool = new Pool({
-  connectionsString: PG_URI,
+  connectionString: PG_URI,
 });
 
 module.exports = {

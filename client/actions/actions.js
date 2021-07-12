@@ -4,23 +4,21 @@
 import * as types from '../constants/actionTypes';
 import * as constants from '../constants/miscConstants';
 
-
-
 export const uploadPicture = (photoId) => ({
-    type: types.UPLOAD_PICTURE,
-    payload: photoId,
-}) 
+  type: types.UPLOAD_PICTURE,
+  payload: photoId,
+});
 
 export const getPicture = () => (dispatch) => {
-    fetch("/api") //request
-    .then(({ data }) => {
-        dispatch({type: types.LOAD_PICTURES,
-        payload: data,
-    });
+  fetch('http://localhost:3000/home') //request
+    .then((response) => response.json())
+    .then((response) => {
+      console.log('get picture response', response);
+      dispatch({ type: types.LOAD_PICTURES, payload: response });
     })
     .catch(console.error);
-}
-    
+};
+
 //     dispatch({type: types.GET_PICTURE,});
 //     SOMENAMEasyn.getPictuesorwhatevver(); //just a stand in for actuall call
 //         .then(response => response.json());
@@ -29,13 +27,81 @@ export const getPicture = () => (dispatch) => {
 //         )
 // };
 
-
 export const removePicture = (photoId) => ({
-    type: types.REMOVE_PICTURE,
-    payload: photoId,
-})
+  type: types.REMOVE_PICTURE,
+  payload: photoId,
+});
 
+export const uploadFile = (e) => {
+  const filename = e.target.value;
+  const formData = new FormData();
+  //let resFilePath;
+  console.log(e);
+  formData.append(filename, e.target.files[0]);
+  return (dispatch) => {
+    return (
+      fetch('http://localhost:3000/api/upload', {
+        method: 'POST',
+        body: formData,
+      })
+        .then((response) => response.text())
+        .then((response) => {
+          //this disptach puts picture into state;
+          // dispatch({ type: types.UPLOAD_PICTURE, payload: response });
+          /*
+        NOTE:
+        response has now been processed and is a string that is equal to the new
+        filepath of the file you just uploaded to the server. So, you know,
+        shove it into state or something? Add it to the array of filepaths we have?
+        Send it to the database? I have faith, you'll kick ass
+        */
+          let resFilePath = response;
+          console.log(resFilePath);
+          console.log('resFilePath', resFilePath);
 
+          console.log('this is gonna be your filepath: ', response);
+
+          fetch('http://localhost:3000/api/upload/save', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+
+            body: JSON.stringify({ filepath: response }),
+          })
+            .then((response) => response.json())
+            .then((response) => {
+              console.log('response from savefiletodb', response);
+              // dispatch({ type: types.LOAD_PICTURES });
+            })
+            .catch((err) => console.log('error from savefiletodb', err));
+
+          // saveFileToDB(`${response}`);
+        })
+        // .then(saveFileToDB(resFilePath))
+        // .then((resFilePath) => dispatch({ type: types.UPLOAD_PICTURE, payload: resFilePath }))
+
+        .catch((err) => console.log('whoops: ', err))
+    );
+  };
+};
+
+export const saveFileToDB = (resFilePath) => {
+  console.log(resFilePath);
+  return fetch('http://localhost:3000/api/upload/save', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+
+    body: { filepath: resFilePath },
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      console.log('response from savefiletodb', response);
+    })
+    .catch((err) => console.log('error from savefiletodb', err));
+};
 
 /*
 export const doAThing = (arguments) => (dispatch) => {
