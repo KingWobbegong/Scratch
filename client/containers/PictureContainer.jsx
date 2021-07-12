@@ -28,7 +28,7 @@ class PictureContainer extends React.Component {
     const arr = [];
     
     this.props.photos.forEach((el, index) =>
-      arr.push(<Picture filepath={el.filepath} key={`pic${index++}`} />)
+      arr.push(<Picture filepath={el.filepath} key={`pic${index++}`} votes={el.vote_count} />)
     );
 
     console.log(this.props);
