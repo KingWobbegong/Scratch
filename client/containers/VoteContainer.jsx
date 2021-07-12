@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import Vote from '../components/Vote';
 
+
+
 const mapStateToProps = (state) => ({
     photos: state.photo.photoArray,
 });
@@ -24,23 +26,30 @@ const mapStateToProps = (state) => ({
 class VoteContainer extends React.Component {
     constructor(props) {
         super(props);
+        
     }
-
+   
     componentWillMount() {
         this.props.getPicture();
         
     }
+    componentDidMount() {
+        shuffleArray(this.props.photos)
+    }
     
 
     render() {
-        // let randomArr = this.props.photos;
-        // function shuffleArray(array) {
-        //     for (let i = array.length - 1; i > 0; i--) {
-        //         const j = Math.floor(Math.random() * (i + 1));
-        //         [array[i], array[j]] = [array[j], array[i]];
-        //     }
-        // }
-        // shuffleArray(randomArr);
+        
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+
+            }
+            return array
+        }
+        //shuffleArray(randomArr);
+        //randomArr = shuffleArray(randomArr)
         if(!this.props.photos[0]) {
             return (
                 <div className='spinner'>
@@ -48,14 +57,16 @@ class VoteContainer extends React.Component {
                 </div>
             );
         }
+        
        else {
-        console.log("this.props.photos[0]", this.props.photos[0])
+        console.log("this.props.photos", this.props.photos)
+        console.log('shuffleArray', randomArr)
 
     return(
         
-        <div className='voteContainer'>
+    <div className='voteContainer'>
         <div className='voteComponent'>
-            <Vote photo={this.props.photos[1].filepath}/>
+            <Vote photo={randomArr[1].filepath}/>
         </div>
     </div>
     )

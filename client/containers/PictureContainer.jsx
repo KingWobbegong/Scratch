@@ -32,6 +32,15 @@ class PictureContainer extends React.Component {
     );
 
     console.log(this.props);
+    if(!this.props.photos[0]) {
+      return (
+          <div className='spinner'>
+              
+          </div>
+      );
+  }
+ else {
+
     return (
       <div className="pictureContainer">
         {/* <button onClick={this.props.getPicture}>Get Photos</button>  */}
@@ -43,7 +52,7 @@ class PictureContainer extends React.Component {
       </div>
     );
   }
-
+  }
   componentDidMount() {
     this.props.getPicture();
   }
