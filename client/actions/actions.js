@@ -4,7 +4,7 @@
 import * as types from '../constants/actionTypes';
 import * as constants from '../constants/miscConstants';
 
-export const uploadPicture = (photoId) => ({
+export const uploadPicture = (photoId) => (dispatch) => dispatch({
   type: types.UPLOAD_PICTURE,
   payload: photoId,
 });
@@ -27,10 +27,37 @@ export const getPicture = () => (dispatch) => {
 //         )
 // };
 
-export const removePicture = (photoId) => ({
+export const removePicture = (photoId) => (dispatch)=>{
+  //send backend server requests to handle removing pictures here
+  
+  dispatch({
   type: types.REMOVE_PICTURE,
   payload: photoId,
 });
+}
+
+export const addVote = (photoId) => (dispatch)=>{
+  const apiAddVoteUrl = "http://localhost:3000/api/vote";
+fetch(apiAddVoteUrl, {
+  method: 'POST',
+  body: JSON.stringify({_id:photoId,change:"add"})
+})
+.then(response=>response.json())
+.then(()=> {
+  dispatch(
+  {
+    type: types.ADD_VOTE,
+    payload: photoId
+  });
+})
+  .catch(err=>
+    console.log('whoops, backend didn\'t respond correctly from addVote API call! \n returned the following error:',err)
+  );
+
+
+
+}
+
 
 export const uploadFile = (e) => {
   const filename = e.target.value;
