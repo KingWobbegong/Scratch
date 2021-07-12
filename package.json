@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production nodemon server/server.js",
     "build": "NODE_ENV=production webpack",
-    "one": "webpack serve",
-    "two": "nodemon server/server.js",
-    "dev": "NODE_ENV=development concurrently \"npm run one\" \"npm run two\""
+    "one": "NODE_ENV=development webpack serve",
+    "two": "NODE_ENV=development nodemon server/server.js",
+    "dev": "concurrently \"npm run one\" \"npm run two\""
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",

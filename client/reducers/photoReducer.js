@@ -3,8 +3,8 @@ import * as types from '../constants/actionTypes';
 let photoId = 0;
 
 const initialState = {
-  photoToUpload : {
-    photoId: photoId ,
+  photoToUpload: {
+    photoId: photoId,
     file: 'file',
   },
   photoArray: [
@@ -17,16 +17,20 @@ const initialState = {
       filepath: './images/image.jpg',
     },
     {
-      id:3,
+      id: 3,
       filepath: './images/wobbegong.jpg',
     },
     {
-      id:4,
+      id: 4,
       filepath: './images/wobbegong1.jpg',
     },
     {
-      id:5,
+      id: 5,
       filepath: './images/wobbegong2.jpg',
+    },
+    {
+      id: 6,
+      filepath: './images/[1]image.png',
     },
   ],
 };
@@ -40,15 +44,15 @@ const photoReducer = (state = initialState, action) => {
     //      secondChangedKey: ""};
     //
 
-    case types.UPLOAD_PICTURE: /* 'photoAdded' */
-      newState = state.slice()
-      newState.photoToUpload.photoId = ++photoId
-      newState.photoToUpload.file = action.payload
-    
+    case types.UPLOAD_PICTURE /* 'photoAdded' */:
+      newState = state.slice();
+      newState.photoToUpload.photoId = ++photoId;
+      newState.photoToUpload.file = action.payload;
+
       return {
-        ...newState
-      }
-    
+        ...newState,
+      };
+
     // return {
     //     ...state, // copy all the photos from the state
     //     {
@@ -60,34 +64,30 @@ const photoReducer = (state = initialState, action) => {
     //   }
     //   ];
 
-      case types.REMOVE_PICTURE: /*'photoRemoved'*/ 
+    case types.REMOVE_PICTURE /*'photoRemoved'*/:
       if (state.photoArray[action.payload.photoId]) {
-        const photoId = action.payload.photoId
-        newState = state.slice()
+        const photoId = action.payload.photoId;
+        newState = state.slice();
         newState.filer((photo) => !photo.id !== photoId);
       }
       return {
-        ...newState
+        ...newState,
+      };
 
-      }
-      
-      // return state.filter(photo => photo.id !== action.payload.id)
+    // return state.filter(photo => photo.id !== action.payload.id)
 
-      // case types.GET_PICTURE: /*for getting picture from SQL*/
-      case types.LOAD_PICTURES:
-        newState = state.slice();
-        newState.photoArray = action.payload;
+    // case types.GET_PICTURE: /*for getting picture from SQL*/
+    case types.LOAD_PICTURES:
+      newState = state.slice();
+      newState.photoArray = action.payload;
 
-        return {
-          ...newState
-        };
+      return {
+        ...newState,
+      };
 
-
-
-      default:
-        return state;
-   } 
-   
+    default:
+      return state;
+  }
 };
 
 export default photoReducer;

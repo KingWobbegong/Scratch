@@ -26,17 +26,22 @@ class PictureContainer extends React.Component {
 // const PictureContainer = props => (
     // return (
 render() {
+    const arr = [];
+    
+    this.props.photos.forEach((el)=>(arr.push(<Picture filepath={el.filepath}/>)));
+
     console.log(this.props)
     return (
 
     <div className='pictureContainer'>
         <div className='picturesDisplay'>
             <h1>Welcome to the Wobbegang</h1>
-            <Picture filepath={this.props.photos[0].filepath}/>
+            {arr}
+            {/* <Picture filepath={this.props.photos[0].filepath}/>
             <Picture filepath={this.props.photos[4].filepath}/>
             <Picture filepath={this.props.photos[1].filepath}/>
             <Picture filepath={this.props.photos[3].filepath}/>
-            <Picture filepath={this.props.photos[2].filepath}/>
+            <Picture filepath={this.props.photos[2].filepath}/> */}
 
         </div>
     </div>
