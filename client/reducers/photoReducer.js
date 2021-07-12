@@ -49,7 +49,6 @@ const photoReducer = (state = initialState, action) => {
       let votedPhotoIndex =  newPhotoArray.findIndex((element)=>element._id==action.payload)
       let votedPhoto = newPhotoArray[votedPhotoIndex];
       votedPhoto.vote_count +=1;
-      newPhotoArray[newPhotoArray.findIndex((element)=>element._id==action.payload)]
       return {
         ...state,
         photoArray: newPhotoArray
