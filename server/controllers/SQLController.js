@@ -7,7 +7,8 @@ SQLController.getFilesFromDB = (req, res, next) => {
   // SQL Query
 
   const getPhoto = {
-    text: `SELECT * FROM pictures`,
+    text: `SELECT * FROM pictures
+          ORDER BY vote_count DESC;`,
   };
 
   db.query(getPhoto, (err, qres) => {
