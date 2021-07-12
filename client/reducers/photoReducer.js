@@ -29,7 +29,7 @@ const photoReducer = (state = initialState, action) => {
       if (state.photoArray[action.payload.photoId]) {
         const photoId = action.payload.photoId;
         newState = { ...state };
-        newState.filer((photo) => !photo.id !== photoId);
+        newState.filter((photo) => !photo.id !== photoId);
       }
       return {
         ...newState,
@@ -43,6 +43,17 @@ const photoReducer = (state = initialState, action) => {
         ...state,
         photoArray: action.payload.rows,
       };
+
+    case types.ADD_VOTE:
+      newPhotoArray = JSON.parse(JSON.stringify(photoArray));
+      let votedPhotoIndex =  newPhotoArray.findIndex((element)=>element._id==action.payload)
+      let votedPhoto = newPhotoArray[votedPhotoIndex];
+      votedPhoto.vote_count +=1;
+      newPhotoArray[newPhotoArray.findIndex((element)=>element._id==action.payload)]
+      return {
+        ...state,
+        photoArray: newPhotoArray
+      }
 
     default:
       return state;
