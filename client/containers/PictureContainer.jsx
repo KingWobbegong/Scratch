@@ -10,12 +10,14 @@ photos: state.photo.photoArray,
 //const mapStateToProps = ({happy}) => ({wantedValues: happy.wantedValues})
 
 const mapDispatchToProps = dispatch => ({
+    getPicture: () => dispatch(actions.getPicture())
+});
         /*key:value pairs like: 
         doAThing: ()=> dispatch(actions.doAThing()), 
         or ActionToPassDown: ()=>dispatch(actions.ActionToPassDown())
         
         */
-});
+
 
 class PictureContainer extends React.Component {
     constructor(props) {
@@ -34,6 +36,7 @@ render() {
     return (
 
     <div className='pictureContainer'>
+        <button onClick={this.props.getPicture}>Get Photos</button> 
         <div className='picturesDisplay'>
             <h1>Welcome to the Wobbegang</h1>
             {arr}
@@ -50,4 +53,4 @@ render() {
 }
 
         
-    export default connect(mapStateToProps, null)(PictureContainer);
+    export default connect(mapStateToProps, mapDispatchToProps)(PictureContainer);

@@ -9,7 +9,7 @@ const PicturesDisplay = props => (
         <Picture/>
     </div>
 </div>
-    )
+)
 
     
 

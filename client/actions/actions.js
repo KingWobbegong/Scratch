@@ -10,9 +10,11 @@ export const uploadPicture = (photoId) => ({
 });
 
 export const getPicture = () => (dispatch) => {
-  fetch('/api') //request
-    .then(({ data }) => {
-      dispatch({ type: types.LOAD_PICTURES, payload: data });
+  fetch('http://localhost:3000/home') //request
+    .then((response) => response.json())
+    .then((response) => {
+      console.log('get picture response', response);
+      dispatch({ type: types.LOAD_PICTURES, payload: response });
     })
     .catch(console.error);
 };
@@ -52,7 +54,7 @@ export const uploadFile = (e) => {
         shove it into state or something? Add it to the array of filepaths we have?
         Send it to the database? I have faith, you'll kick ass
         */
-          resFilePath = response;
+          //resFilePath = response;
           console.log(resFilePath);
 
           console.log('this is gonna be your filepath: ', response);
