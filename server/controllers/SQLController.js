@@ -7,8 +7,13 @@ SQLController.getFilesFromDB = (req, res, next) => {
   // SQL Query
 
   const getPhoto = {
+<<<<<<< HEAD
+    text: `SELECT * FROM pictures 
+        ORDER BY vote_count DESC`,
+=======
     text: `SELECT * FROM pictures
           ORDER BY vote_count DESC;`,
+>>>>>>> dev
   };
 
   db.query(getPhoto, (err, qres) => {
@@ -17,7 +22,7 @@ SQLController.getFilesFromDB = (req, res, next) => {
       return next(err);
     }
     res.locals = qres;
-    console.log('this is coming from getPhoto', res.locals);
+    // console.log('this is coming from getPhoto', res.locals);
     return next();
   });
 };

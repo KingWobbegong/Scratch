@@ -28,10 +28,19 @@ class PictureContainer extends React.Component {
     const arr = [];
     
     this.props.photos.forEach((el, index) =>
-      arr.push(<Picture filepath={el.filepath} key={`pic${index++}`} />)
+      arr.push(<Picture filepath={el.filepath} key={`pic${index++}`} votes={el.vote_count} />)
     );
 
     console.log(this.props);
+    if(!this.props.photos[0]) {
+      return (
+          <div className='spinner'>
+              
+          </div>
+      );
+  }
+ else {
+
     return (
       <div className="pictureContainer">
         {/* <button onClick={this.props.getPicture}>Get Photos</button>  */}
@@ -43,7 +52,7 @@ class PictureContainer extends React.Component {
       </div>
     );
   }
-
+  }
   componentDidMount() {
     this.props.getPicture();
   }
