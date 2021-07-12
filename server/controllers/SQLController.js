@@ -20,4 +20,20 @@ SQLController.getFilesFromDB = (req, res, next) => {
   });
 };
 
+SQLController.uploadFileToDB = (req, res, next) => {
+  const filepath = req.body;
+  console.log(filepath);
+  const uploadPhotoQ = {
+    text: `INSERT INTO pictures (filepath) VALUES ($1)`,
+  };
+
+  db.query(uploadPhotoQ, filepath, (err, qres) => {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.locals = qres;
+  });
+};
+
 module.exports = SQLController;
