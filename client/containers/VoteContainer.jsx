@@ -33,13 +33,9 @@ class VoteContainer extends React.Component {
         this.props.getPicture();
         
     }
-    componentDidMount() {
-        shuffleArray(this.props.photos)
-    }
-    
+      
 
-    render() {
-        
+    render() {        
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -48,25 +44,24 @@ class VoteContainer extends React.Component {
             }
             return array
         }
-        //shuffleArray(randomArr);
+        shuffleArray(this.props.photos);
         //randomArr = shuffleArray(randomArr)
         if(!this.props.photos[0]) {
             return (
                 <div className='spinner'>
-                    
                 </div>
             );
         }
         
        else {
         console.log("this.props.photos", this.props.photos)
-        console.log('shuffleArray', randomArr)
+        console.log('shuffleArray')
 
     return(
         
     <div className='voteContainer'>
         <div className='voteComponent'>
-            <Vote photo={randomArr[1].filepath}/>
+            <Vote photo={this.props.photos[0].filepath}/>
         </div>
     </div>
     )
