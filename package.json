@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production nodemon server/server.js",
     "build": "NODE_ENV=production webpack",
-    "one": "NODE_ENV=development webpack serve",
+    "one": "webpack serve",
     "two": "nodemon server/server.js",
-    "dev": "concurrently \"npm run one\" \"npm run two\""
+    "dev": "NODE_ENV=development concurrently \"npm run one\" \"npm run two\""
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -17,6 +17,7 @@
     "@babel/preset-react": "^7.14.5",
     "babel-loader": "^8.2.2",
     "concurrently": "^6.2.0",
+    "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.6",
     "isomorphic-fetch": "^3.0.0",
