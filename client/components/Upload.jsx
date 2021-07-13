@@ -34,16 +34,23 @@ const Upload = ({
     uploadFile,
     }) => (
     <div className='uploadComponentHead'>
-        <div className='upload'>
-            <h1>Hello Upload</h1>
+       <div className='upload'>
+            <h3>(hit me with your)</h3>
             <input 
             type="file" 
             onChange={uploadFile}
             accept="image/png, image/jpeg"
+            id="upload-input"
+            style={{display:'none'}}
+            className="label"
             />
+            <label for="upload-input">BEST SHOT</label>
         </div>
     </div>
 )
+
+
+
                 
 /*THIS IS THE (anonymous) FUNCTION THAT WILL, ON CHANGE 
 (AKA USER SELECTS A PICTURE, HITS OK)
