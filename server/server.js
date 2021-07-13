@@ -21,7 +21,7 @@ app.use(
 app.use(cookieParser());
 
 app.get('/vote', (req, res) => {
-  return res.send('this is /vote');
+  return res.redirect('/');
 });
 //this is the call to get all files from sql database
 app.get('/home', SQLController.getFilesFromDB, (req, res) => {
@@ -31,24 +31,29 @@ app.get('/home', SQLController.getFilesFromDB, (req, res) => {
 });
 
 app.get('/upload', (req, res) => {
-  return res.send('this is /upload');
+  return res.redirect('/');
 });
 
 app.get('/signin', (req, res) => {
-  return res.send('this is /signin');
+  return res.redirect('/');
 });
 
 app.get('/signup', (req, res) => {
-  return res.send('this is /signup');
+  return res.redirect('/');
 });
 
 app.get('/photos', (req, res) => {
-  return res.send('this is /photos');
+  return res.send('this is /photos.  pretty sure it\'s never used');
 });
 
 app.post('/api/vote', SQLController.vote, (req, res) => {
   return res.send(req.body);
 });
+
+app.post('/api/database/flush', SQLController.flush, (req,res) => {
+  console.log("request sent to flush", req.body);
+  return res.send('on your own head be it');
+})
 
 app.post('/api/update', (req, res) => {
   console.log(req.body, 'received at /api/update');
@@ -67,7 +72,7 @@ app.post('/api/upload', function (req, res) {
   const busboy = new Busboy({
     headers: req.headers,
   });
-  let returnFilename, returnPrepend, returnFilepath, filepath;
+  let filepath;
   busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
     let filePrepend = 1;
     filepath = './images/' + filename;

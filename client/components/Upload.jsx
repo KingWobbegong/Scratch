@@ -35,12 +35,15 @@ const Upload = ({
     }) => (
     <div className='uploadComponentHead'>
         <div className='upload'>
-            <h1>Hello Upload</h1>
+            <h1>(hit me with your)</h1>
             <input 
             type="file" 
             onChange={uploadFile}
             accept="image/png, image/jpeg"
+            id="upload-button"
+            style={{display:"none"}}
             />
+            <label for="upload-button">Best Shot</label>
         </div>
     </div>
 )
