@@ -73,4 +73,25 @@ SQLController.vote = (req, res, next) => {
   }
 };
 
+SQLController.flush = (req,res,next) =>{
+const {passPhrase} = req.body;
+console.log("wheeeeee")
+console.log(passPhrase)
+
+if (passPhrase === 'I promise I want to delete the pictures table'){
+  const nukePhotosTable = {
+      text: `DELETE FROM pictures`
+  }
+  db.query(nukePhotosTable, (err,res) =>{
+
+    if (err){
+      console.log(err);
+      return next(err);
+    }
+    res.locals = res;
+    return next();
+  })
+}
+}
+
 module.exports = SQLController;

@@ -13,7 +13,7 @@ module.exports = {
   devServer: {
     publicPath: '/build',
     proxy: {
-      '/api/**': {
+      '/api/****': {
         target: 'http://localhost:3000',
         secure: false,
       },
@@ -21,6 +21,18 @@ module.exports = {
         target: 'http://localhost:3000',
         secure: false,
       },
+      '/picture': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+      '/upload': {
+        target: 'http://localhost:3000',
+        secure:false,
+      },
+      '/vote': {
+        target: 'http://localhost:3000',
+        secure:false,
+      }
     },
   },
   module: {
