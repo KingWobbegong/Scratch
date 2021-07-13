@@ -42,11 +42,15 @@ const Upload = ({
             accept="image/png, image/jpeg"
             id="upload-button"
             style={{display:"none"}}
+            className="label"
             />
             <label for="upload-button">Best Shot</label>
         </div>
     </div>
 )
+
+
+
                 
 /*THIS IS THE (anonymous) FUNCTION THAT WILL, ON CHANGE 
 (AKA USER SELECTS A PICTURE, HITS OK)

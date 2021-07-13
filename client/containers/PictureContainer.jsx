@@ -45,7 +45,7 @@ class PictureContainer extends React.Component {
       <div className="pictureContainer">
         {/* <button onClick={this.props.getPicture}>Get Photos</button>  */}
         <div className="picturesDisplay">
-          <h1>Welcome to the Wobbegang</h1>
+          <h1 className='bestShot'>Best Shot!</h1>
           {arr}
           {/* <Picture filepath={this.props.photos[0].filepath}/> */}
         </div>
